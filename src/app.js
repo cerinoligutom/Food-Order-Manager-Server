@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-let express = require('express');
-let graphqlHTTP = require('express-graphql');
-let compression = require('compression');
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
+require('dotenv').config();
+
 import { buildSchema } from 'graphql';
 import chalk from 'chalk';
 
@@ -13,8 +14,8 @@ let schema = buildSchema(`
 
 let root = { hello: () => 'Hello World!' };
 
-let app = express();
-app.use(compression());
+const app = express();
+require('./config/configure-express')(app);
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
@@ -22,6 +23,6 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-app.listen(3000, () => {
-  console.log(chalk.green('Server is up on localhost:3000/graphql'));
+app.listen(app.get('port'), () => {
+  console.log(chalk.green(`Server is now up @ ${app.get('host')}:${app.get('port')}`));
 });
