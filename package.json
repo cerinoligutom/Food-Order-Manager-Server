@@ -27,13 +27,18 @@
   },
   "homepage": "https://github.com/zeferinix/Food-Order-Manager-Server#readme",
   "dependencies": {
+    "bcrypt": "1.0.3",
+    "body-parser": "1.18.2",
     "chalk": "2.3.2",
     "compression": "1.7.2",
     "dotenv": "5.0.1",
     "express": "4.16.2",
     "express-graphql": "0.6.12",
     "graphql": "0.13.1",
-    "pm2": "2.10.1"
+    "pg": "7.4.1",
+    "pg-hstore": "2.3.2",
+    "pm2": "2.10.1",
+    "sequelize": "4.35.1"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
