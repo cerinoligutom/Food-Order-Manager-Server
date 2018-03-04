@@ -5,8 +5,6 @@ let compression = require('compression');
 import { buildSchema } from 'graphql';
 import chalk from 'chalk';
 
-app.use(compression());
-
 let schema = buildSchema(`
     type Query {
         hello: String
@@ -16,6 +14,8 @@ let schema = buildSchema(`
 let root = { hello: () => 'Hello World!' };
 
 let app = express();
+app.use(compression());
+
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
