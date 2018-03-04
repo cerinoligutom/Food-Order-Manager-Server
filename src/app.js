@@ -17,11 +17,11 @@ let root = { hello: () => 'Hello World!' };
 
 let app = express();
 app.use('/graphql', graphqlHTTP({
-    schema: schema,
-    rootValue: root,
-    graphiql: true
+  schema: schema,
+  rootValue: root,
+  graphiql: true
 }));
 
 app.listen(3000, () => {
-    console.log(chalk.green('Server is up on localhost:3000/graphql'));
+  console.log(chalk.green('Server is up on localhost:3000/graphql'));
 });
