@@ -16,7 +16,11 @@ export default (sequelize, DataTypes) => {
       is_fully_paid: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-      }
+      },
+
+      host_id: { type: DataTypes.INTEGER },
+
+      transaction_id: { type: DataTypes.INTEGER }
     },
     {
       underscored: true
@@ -30,6 +34,8 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'id',
       otherKey: 'order_id'
     });
+
+    Order.belongsTo(models.Transaction);
   };
 
   return Order;

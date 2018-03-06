@@ -48,7 +48,8 @@ export default async () => {
     OrderItem: sequelize.import('./orderItem'),
     Vendor: sequelize.import('./vendor'),
     Product: sequelize.import('./product'),
-    ContactNumber: sequelize.import('./contactNumber')
+    ContactNumber: sequelize.import('./contactNumber'),
+    Transaction: sequelize.import('./transaction')
   };
 
   Object.keys(models).forEach((modelName) => {
