@@ -14,7 +14,7 @@ export default (sequelize, DataTypes) => {
           isAlphanumeric: {
             args: true,
             msg: 'The username can only contain letters and numbers'
-          }
+          },
         }
       },
 
@@ -45,6 +45,22 @@ export default (sequelize, DataTypes) => {
           isEmail: {
             args: true,
             msg: 'Invalid email'
+          },
+          isMllrDevEmail(value) {
+            const validDomains = ['mllrdev.com'];
+
+            let isValid = false;
+            validDomains.forEach(domain => {
+              if (!isValid) {
+                if (value.endsWith(domain)) {
+                  isValid = true;
+                }
+              }
+            });
+
+            if (!isValid) {
+              throw new Error('This email domain is not allowed.');
+            }
           }
         }
       },

@@ -1,38 +1,45 @@
 /* eslint-disable no-console */
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-import { buildSchema } from 'graphql';
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
 import chalk from 'chalk';
-import getModels from './models';
+
+import schema from './graphql/schema';
+import postgrePool from './postgre';
+
 require('dotenv').config();
-
-let schema = buildSchema(`
-    type Query {
-        hello: String
-    }
-`);
-
-let root = { hello: () => 'Hello World!' };
 
 const app = express();
 require('./config/configure-express')(app);
 
-getModels().then((models) => {
-  if (!models) {
-    /* eslint-disable-next-line no-console */
-    console.log(chalk.redBright('Could not connect to database'));
-    return;
-  }
+const start = async () => {
+  const pgPool = await postgrePool();
+  console.log(chalk.yellowBright('pgPool', Object.keys(pgPool)));
+  await pgPool.sequelize.sync();
 
-  models.sequelize.sync({ force: true }).then(() => {
-    app.use('/graphql', graphqlHTTP({
-      schema: schema,
-      rootValue: root,
-      graphiql: true
-    }));
+  app.use(
+    '/graphql',
+    graphqlHTTP(request => {
+      const startTime = Date.now();
 
-    app.listen(app.get('port'), () => {
-      console.log(chalk.greenBright(`Server is now up @ ${app.get('host')}:${app.get('port')}`));
-    });
+      return {
+        schema: schema,
+        context: {
+          user: request.user,
+          pgPool: pgPool
+        },
+        graphiql: true,
+
+        /* eslint-disable-next-line no-unused-vars */
+        extensions: ({ document, variables, operationName, result }) => ({
+          timing: (Date.now() - startTime).toString() + 'ms',
+        })
+      };
+    })
+  );
+
+  app.listen(app.get('port'), () => {
+    console.log(chalk.greenBright(`Server is now up @ ${app.get('host')}:${app.get('port')}`));
   });
-}, err => console.log(err));
+
+};
+start();
