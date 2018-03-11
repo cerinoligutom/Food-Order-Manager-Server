@@ -1,4 +1,5 @@
 import Base from '../base';
+import Role from '../role/schema';
 
 const User = `
 extend type Query {
@@ -26,7 +27,9 @@ type User {
   caption: String
   image: String
   confirmed: Boolean
+  created_at: Date
   active: Boolean
+  Role: [Role]
 }
 
 input CreateUserInput {
@@ -52,4 +55,4 @@ input EditUserInput {
 }
 `;
 
-export default() => [User, Base];
+export default() => [User, Role, Base];

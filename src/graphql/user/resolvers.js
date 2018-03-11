@@ -48,12 +48,18 @@ export const Mutation = {
 };
 
 export const User = {
-  full_name: user => Promise.resolve(`${user.first_name} ${user.last_name}`)
+  full_name: user => Promise.resolve(`${user.first_name} ${user.last_name}`),
+  Role: async (user, _, { dataloaders }) => {
+    let userRoles = await dataloaders.userRolesById.load(user.id);
+    userRoles = userRoles.map(userRole => dataloaders.roleById.load(userRole.role_id));
+    return userRoles;
+  }
+
 };
 
 export const getUsersById = pgPool => ids =>
   Promise.resolve(
-    ids.map(id => pgPool.User.findOne({ where: { user_id: id } }))
+    ids.map(id => pgPool.User.findOne({ where: { id: id } }))
     // Might want to consider filtering the results if the requested ID is not found
   );
 

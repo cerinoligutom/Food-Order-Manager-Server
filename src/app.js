@@ -6,6 +6,8 @@ import chalk from 'chalk';
 import schema from './graphql/schema';
 import postgrePool from './postgre';
 
+import getDataloaders from './graphql/dataloaders';
+
 require('dotenv').config();
 
 const app = express();
@@ -13,8 +15,10 @@ require('./config/configure-express')(app);
 
 const start = async () => {
   const pgPool = await postgrePool();
-  console.log(chalk.yellowBright('pgPool', Object.keys(pgPool)));
+  // await pgPool.sequelize.sync({ force: true });
   await pgPool.sequelize.sync();
+
+  let dataloaders = getDataloaders(pgPool);
 
   app.use(
     '/graphql',
@@ -25,7 +29,8 @@ const start = async () => {
         schema: schema,
         context: {
           user: request.user,
-          pgPool: pgPool
+          pgPool: pgPool,
+          dataloaders: dataloaders
         },
         graphiql: true,
 
