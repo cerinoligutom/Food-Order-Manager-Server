@@ -37,27 +37,21 @@ export const Mutation = {
     await user.updateAttributes(input);
     return user;
   },
-
-  deleteUser: async (_, { id }, { pgPool }) => {
-    // TODO:
-    // Don't delete user but flag instead
-    return pgPool.User.destroy({
-      where: { id: id }
-    });
-  }
 };
 
 export const User = {
   full_name: user => Promise.resolve(`${user.first_name} ${user.last_name}`),
+
   Role: async (user, _, { dataloaders }) => {
     let userRoles = await dataloaders.userRolesById.load(user.id);
-    userRoles = userRoles.map(userRole => dataloaders.roleById.load(userRole.role_id));
-    return userRoles;
-  }
+    return userRoles.map(userRole => dataloaders.roleById.load(userRole.role_id));
+  },
 
+  Order: (user, _, { dataloaders }) =>
+    dataloaders.ordersByUserId.load(user.id)
 };
 
-export const getUsersById = pgPool => ids =>
+const getUsersById = pgPool => ids =>
   Promise.resolve(
     ids.map(id => pgPool.User.findOne({ where: { id: id } }))
     // Might want to consider filtering the results if the requested ID is not found

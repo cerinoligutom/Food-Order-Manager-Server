@@ -9,18 +9,19 @@ export default (sequelize, DataTypes) => {
 
       user_id: { type: DataTypes.INTEGER },
 
-      comments: { type: DataTypes.STRING },
+      comment: { type: DataTypes.STRING },
 
-      quantity: { type: DataTypes.INTEGER },
-
-      is_fully_paid: {
+      isFullyPaid: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       },
 
-      host_id: { type: DataTypes.INTEGER },
+      transaction_id: { type: DataTypes.INTEGER },
 
-      transaction_id: { type: DataTypes.INTEGER }
+      isCancelled: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
     },
     {
       underscored: true
@@ -28,12 +29,13 @@ export default (sequelize, DataTypes) => {
   );
 
   Order.associate = (models) => {
-    Order.belongsToMany(models.OrderItem, {
-      as: 'OrderItems',
-      through: models.OrderItem,
-      foreignKey: 'id',
-      otherKey: 'order_id'
-    });
+    // Order.belongsToMany(models.OrderItem, {
+    //   as: 'OrderItems',
+    //   through: models.OrderItem,
+    //   foreignKey: 'id',
+    //   otherKey: 'order_id'
+    // });
+    Order.hasMany(models.OrderItem);
 
     Order.belongsTo(models.Transaction);
   };

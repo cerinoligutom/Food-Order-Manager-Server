@@ -1,5 +1,6 @@
 import Base from '../base';
 import Role from '../role/schema';
+import Order from '../order/schema';
 
 const User = `
 extend type Query {
@@ -10,7 +11,6 @@ extend type Query {
 extend type Mutation {
   createUser(input: CreateUserInput): User
   editUser(input: EditUserInput): User
-  deleteUser(id: ID!): Boolean
 }
 
 type User {
@@ -28,8 +28,9 @@ type User {
   image: String
   confirmed: Boolean
   created_at: Date
-  active: Boolean
+  isActive: Boolean
   Role: [Role]
+  Order: [Order]
 }
 
 input CreateUserInput {
@@ -55,4 +56,4 @@ input EditUserInput {
 }
 `;
 
-export default() => [User, Role, Base];
+export default () => [User, Role, Order, Base];

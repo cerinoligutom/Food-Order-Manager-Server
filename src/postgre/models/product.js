@@ -6,7 +6,12 @@ export default (sequelize, DataTypes) => {
 
       image: { type: DataTypes.STRING },
 
-      price: { type: Sequelize.FLOAT }
+      price: { type: Sequelize.FLOAT },
+
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+      }
     },
     {
       underscored: true
@@ -15,12 +20,6 @@ export default (sequelize, DataTypes) => {
 
   Product.associate = (models) => {
     Product.belongsTo(models.Vendor);
-    Product.belongsToMany(models.OrderItem, {
-      as: 'OrderItems',
-      through: models.OrderItem,
-      foreignKey: 'id',
-      otherKey: 'product_id'
-    });
   };
 
   return Product;

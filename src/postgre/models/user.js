@@ -69,7 +69,7 @@ export default (sequelize, DataTypes) => {
 
       image: { type: DataTypes.STRING },
 
-      active: {
+      isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       }

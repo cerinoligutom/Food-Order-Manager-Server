@@ -9,7 +9,12 @@ export default (sequelize, DataTypes) => {
 
       name: { type: DataTypes.STRING },
 
-      image: { type: DataTypes.STRING }
+      image: { type: DataTypes.STRING },
+
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+      }
     },
     {
       underscored: true
