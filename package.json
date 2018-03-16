@@ -43,7 +43,8 @@
     "pg": "7.4.1",
     "pg-hstore": "2.3.2",
     "pm2": "2.10.1",
-    "sequelize": "4.36.0"
+    "sequelize": "4.36.0",
+    "shortid": "2.2.8"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

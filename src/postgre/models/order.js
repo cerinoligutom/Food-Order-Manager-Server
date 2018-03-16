@@ -1,13 +1,15 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const Order = sequelize.define('order',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
 
-      user_id: { type: DataTypes.INTEGER },
+      user_id: { type: DataTypes.STRING },
 
       comment: { type: DataTypes.STRING },
 
@@ -16,7 +18,7 @@ export default (sequelize, DataTypes) => {
         defaultValue: false
       },
 
-      transaction_id: { type: DataTypes.INTEGER },
+      transaction_id: { type: DataTypes.STRING },
 
       isCancelled: {
         type: DataTypes.BOOLEAN,

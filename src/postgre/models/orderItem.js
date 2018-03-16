@@ -1,15 +1,21 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const OrderItem = sequelize.define('order_item',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
-      order_id: { type: DataTypes.INTEGER },
-      product_id: { type: DataTypes.INTEGER },
+
+      order_id: { type: DataTypes.STRING },
+
+      product_id: { type: DataTypes.STRING },
+
       quantity: { type: DataTypes.INTEGER },
-      isCancelled: {
+
+      is_cancelled: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       }

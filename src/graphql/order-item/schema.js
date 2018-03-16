@@ -18,7 +18,7 @@ type OrderItem {
   Order: Order
   Product: Product
   quantity: Int
-  isCancelled: Boolean
+  is_cancelled: Boolean
 }
 
 input AddOrderItemInput {

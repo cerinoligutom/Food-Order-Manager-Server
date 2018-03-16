@@ -1,10 +1,12 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const Role = sequelize.define('role',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
 
       name: { type: DataTypes.STRING }

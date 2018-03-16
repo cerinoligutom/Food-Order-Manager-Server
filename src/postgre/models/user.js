@@ -1,10 +1,12 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('user',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
 
       username: {
@@ -69,7 +71,7 @@ export default (sequelize, DataTypes) => {
 
       image: { type: DataTypes.STRING },
 
-      isActive: {
+      is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       }

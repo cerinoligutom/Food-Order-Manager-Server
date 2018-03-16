@@ -1,14 +1,21 @@
-import Sequelize from 'sequelize';
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const Product = sequelize.define('product',
     {
+      id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        defaultValue: shortid.generate()
+      },
+
       name: { type: DataTypes.STRING },
 
       image: { type: DataTypes.STRING },
 
-      price: { type: Sequelize.FLOAT },
+      price: { type: DataTypes.FLOAT },
 
-      isActive: {
+      is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       }

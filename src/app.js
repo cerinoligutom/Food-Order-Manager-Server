@@ -15,8 +15,8 @@ require('./config/configure-express')(app);
 
 const start = async () => {
   const pgPool = await postgrePool();
-  // await pgPool.sequelize.sync({ force: true });
-  await pgPool.sequelize.sync();
+  await pgPool.sequelize.sync({ force: true });
+  // await pgPool.sequelize.sync();
 
   // let dataloaders = getDataloaders(pgPool);
 
@@ -26,28 +26,6 @@ const start = async () => {
       const startTime = Date.now();
 
       let dataloaders = getDataloaders(pgPool);
-
-
-      return {
-        schema: schema,
-        context: {
-          user: request.user,
-          pgPool: pgPool,
-          dataloaders: dataloaders
-        },
-
-        /* eslint-disable-next-line no-unused-vars */
-        extensions: ({ document, variables, operationName, result }) => ({
-          timing: (Date.now() - startTime).toString() + 'ms',
-        })
-      };
-    })
-  );
-
-  app.post(
-    '/api',
-    graphqlHTTP(request => {
-      const startTime = Date.now();
 
       return {
         schema: schema,

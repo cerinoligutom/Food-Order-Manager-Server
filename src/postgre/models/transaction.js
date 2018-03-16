@@ -1,15 +1,17 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const Transaction = sequelize.define('transaction',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
 
-      host_id: { type: DataTypes.INTEGER },
+      host_id: { type: DataTypes.STRING },
 
-      vendor_id: { type: DataTypes.INTEGER },
+      vendor_id: { type: DataTypes.STRING },
 
       description: { type: DataTypes.STRING },
 

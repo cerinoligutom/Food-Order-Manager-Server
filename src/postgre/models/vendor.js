@@ -1,17 +1,19 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const Vendor = sequelize.define('vendor',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
 
       name: { type: DataTypes.STRING },
 
       image: { type: DataTypes.STRING },
 
-      isActive: {
+      is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       }

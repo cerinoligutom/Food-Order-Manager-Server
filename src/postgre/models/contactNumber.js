@@ -1,13 +1,17 @@
+import shortid from 'shortid';
+
 export default (sequelize, DataTypes) => {
   const ContactNumber = sequelize.define('contact_number',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: shortid.generate()
       },
+
       number: { type: DataTypes.STRING },
-      vendor_id: { type: DataTypes.INTEGER }
+
+      vendor_id: { type: DataTypes.STRING }
     },
     {
       underscored: true

@@ -28,7 +28,7 @@ type User {
   image: String
   confirmed: Boolean
   created_at: Date
-  isActive: Boolean
+  is_active: Boolean
   Role: [Role]
   Order: [Order]
 }

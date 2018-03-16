@@ -18,7 +18,7 @@ type Product {
   name: String
   price: Float
   image: String
-  isActive: Boolean
+  is_active: Boolean
 }
 
 input AddProductInput {
@@ -33,7 +33,7 @@ input EditProductInput {
   name: String
   price: Float
   image: String
-  isActive: Boolean
+  is_active: Boolean
 }
 `;
 
