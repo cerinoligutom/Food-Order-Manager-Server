@@ -1,5 +1,6 @@
 import DataLoader from 'dataloader';
 import { GraphQLError } from 'graphql';
+import { generateHash } from '../../utils/password';
 
 export const Query = {
   User: async (_, { id }, { pgPool }) => {
@@ -17,6 +18,9 @@ export const Mutation = {
     });
 
     if (user) { throw new GraphQLError('Username / Email already exists'); }
+
+    let hash = await generateHash(input.hash);
+    input.hash = hash;
 
     let createdUser = await pgPool.User.create(input);
     return createdUser;
