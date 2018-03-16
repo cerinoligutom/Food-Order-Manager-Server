@@ -57,7 +57,13 @@ const getOrdersByUserIds = pgPool => ids =>
     ids.map(id => pgPool.Order.findAll({ where: { user_id: id }}))
   );
 
+const getOrdersByTransactionIds = pgPool => ids =>
+  Promise.resolve(
+    ids.map(id => pgPool.Order.findAll({ where: { transaction_id: id }}))
+  );
+
 export const dataloaders = pgPool => ({
   orderById: new DataLoader(getOrdersById(pgPool)),
-  ordersByUserId: new DataLoader(getOrdersByUserIds(pgPool))
+  ordersByUserId: new DataLoader(getOrdersByUserIds(pgPool)),
+  ordersByTransactionId: new DataLoader(getOrdersByTransactionIds(pgPool))
 });

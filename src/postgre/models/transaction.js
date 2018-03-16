@@ -13,7 +13,12 @@ export default (sequelize, DataTypes) => {
 
       description: { type: DataTypes.STRING },
 
-      delivery_fee: { type: DataTypes.FLOAT }
+      delivery_fee: { type: DataTypes.FLOAT },
+
+      is_fulfilled: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
     },
     {
       underscored: true

@@ -3,7 +3,12 @@ import DataLoader from 'dataloader';
 
 export const Query = {
   Transaction: (_, { id }, { pgPool }) =>
-    pgPool.Transaction.findOne({ where: { id: id }})
+    pgPool.Transaction.findOne({ where: { id: id }}),
+
+  // TODO: Pagination
+  // eslint-disable-next-line no-unused-vars
+  Transactions: (_, { from, limit }, { pgPool }) =>
+    pgPool.Transaction.findAll()
 };
 
 export const Mutation = {
@@ -36,7 +41,10 @@ export const Transaction = {
     dataloaders.userById.load(transaction.host_id),
 
   Vendor: (transaction, _, { dataloaders }) =>
-    dataloaders.vendorById.load(transaction.vendor_id)
+    dataloaders.vendorById.load(transaction.vendor_id),
+
+  Orders: (transaction, _, { dataloaders }) =>
+    dataloaders.ordersByTransactionId.load(transaction.id)
 };
 
 const getTransactionsById = pgPool => ids =>
