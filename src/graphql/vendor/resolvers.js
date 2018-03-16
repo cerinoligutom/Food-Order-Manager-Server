@@ -3,7 +3,12 @@ import DataLoader from 'dataloader';
 
 export const Query = {
   Vendor: (_, { id }, { pgPool }) =>
-    pgPool.Vendor.findOne({ where: { id: id }})
+    pgPool.Vendor.findOne({ where: { id: id }}),
+
+  // TODO: Pagination
+  // eslint-disable-next-line no-unused-vars
+  Vendors: (_, { from, limit }, { pgPool }) =>
+    pgPool.Vendor.findAll()
 };
 
 export const Mutation = {
