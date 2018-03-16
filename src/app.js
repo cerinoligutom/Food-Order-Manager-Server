@@ -18,12 +18,59 @@ const start = async () => {
   // await pgPool.sequelize.sync({ force: true });
   await pgPool.sequelize.sync();
 
-  let dataloaders = getDataloaders(pgPool);
+  // let dataloaders = getDataloaders(pgPool);
+
+  app.post(
+    '/api',
+    graphqlHTTP(request => {
+      const startTime = Date.now();
+
+      let dataloaders = getDataloaders(pgPool);
+
+
+      return {
+        schema: schema,
+        context: {
+          user: request.user,
+          pgPool: pgPool,
+          dataloaders: dataloaders
+        },
+
+        /* eslint-disable-next-line no-unused-vars */
+        extensions: ({ document, variables, operationName, result }) => ({
+          timing: (Date.now() - startTime).toString() + 'ms',
+        })
+      };
+    })
+  );
+
+  app.post(
+    '/api',
+    graphqlHTTP(request => {
+      const startTime = Date.now();
+
+      return {
+        schema: schema,
+        context: {
+          user: request.user,
+          pgPool: pgPool,
+          dataloaders: dataloaders
+        },
+
+        /* eslint-disable-next-line no-unused-vars */
+        extensions: ({ document, variables, operationName, result }) => ({
+          timing: (Date.now() - startTime).toString() + 'ms',
+        })
+      };
+    })
+  );
 
   app.use(
     '/graphql',
     graphqlHTTP(request => {
       const startTime = Date.now();
+
+      let dataloaders = getDataloaders(pgPool);
 
       return {
         schema: schema,
