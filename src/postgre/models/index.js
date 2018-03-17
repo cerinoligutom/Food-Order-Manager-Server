@@ -12,11 +12,12 @@ export default async () => {
   let password = process.env.DB_PASS || 'password';
 
   const sequelize = new Sequelize(
+    process.env.DATABASE_URL ||
     database,
     username,
     password,
     {
-      host: process.env.DB_HOST || 'localhost',
+      host: 'localhost',
       dialect: 'postgres',
       operatorsAliases: Sequelize.Op,
       define: {

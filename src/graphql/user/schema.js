@@ -9,7 +9,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  createUser(input: CreateUserInput): User
   editUser(input: EditUserInput): User
 }
 
@@ -29,17 +28,9 @@ type User {
   confirmed: Boolean
   created_at: Date
   is_active: Boolean
+  last_active: Date
   Role: [Role]
   Order: [Order]
-}
-
-input CreateUserInput {
-  username: String!
-  hash: String!
-  first_name: String
-  middle_name: String
-  last_name: String
-  email: String!
 }
 
 input EditUserInput {

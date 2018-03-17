@@ -5,7 +5,7 @@ export const generateHash = async (password, rounds=14) => {
   return hash;
 };
 
-export const compare = async (password, hash) => {
+export const compareHash = async (password, hash) => {
   let result = await bcrypt.compare(password, hash);
   return result;
 };

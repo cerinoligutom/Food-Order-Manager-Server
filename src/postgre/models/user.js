@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+import moment from 'moment';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('user',
@@ -74,6 +75,11 @@ export default (sequelize, DataTypes) => {
       is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+      },
+
+      last_active: {
+        type: DataTypes.DATE,
+        defaultValue: moment()
       }
     },
     {

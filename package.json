@@ -36,15 +36,19 @@
     "dotenv": "5.0.1",
     "express": "4.16.2",
     "express-graphql": "0.6.12",
+    "express-session": "1.15.6",
     "express-status-monitor": "1.0.1",
     "graphql": "0.13.1",
     "graphql-tools": "2.21.0",
     "moment": "2.21.0",
+    "passport": "0.4.0",
+    "passport-custom": "1.0.5",
     "pg": "7.4.1",
     "pg-hstore": "2.3.2",
     "pm2": "2.10.1",
     "sequelize": "4.36.0",
-    "shortid": "2.2.8"
+    "shortid": "2.2.8",
+    "uuid": "3.2.1"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

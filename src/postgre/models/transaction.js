@@ -29,7 +29,7 @@ export default (sequelize, DataTypes) => {
 
   Transaction.associate = (models) => {
     Transaction.hasOne(models.Vendor);
-    Transaction.hasOne(models.User, { as: 'Host' });
+    Transaction.belongsTo(models.User, { as: 'Host' });
   };
 
   return Transaction;

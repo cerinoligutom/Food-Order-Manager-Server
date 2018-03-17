@@ -10,21 +10,21 @@ export const Query = {
 };
 
 export const Mutation = {
-  createUser: async (_, { input }, { pgPool }) => {
-    let user = await pgPool.User.findOne({
-      where: {
-        [pgPool.op.or]: [{ username: input.username }, { email: input.email }]
-      }
-    });
+  // createUser: async (_, { input }, { pgPool }) => {
+  //   let user = await pgPool.User.findOne({
+  //     where: {
+  //       [pgPool.op.or]: [{ username: input.username }, { email: input.email }]
+  //     }
+  //   });
 
-    if (user) { throw new GraphQLError('Username / Email already exists'); }
+  //   if (user) { throw new GraphQLError('Username / Email already exists'); }
 
-    let hash = await generateHash(input.hash);
-    input.hash = hash;
+  //   let hash = await generateHash(input.hash);
+  //   input.hash = hash;
 
-    let createdUser = await pgPool.User.create(input);
-    return createdUser;
-  },
+  //   let createdUser = await pgPool.User.create(input);
+  //   return createdUser;
+  // },
 
   editUser: async (_, { input }, { pgPool }) => {
     // TODO:
