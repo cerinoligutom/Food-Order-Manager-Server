@@ -9,7 +9,7 @@
     "build": "babel src -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "production": "pm2 start ./dist/app.js -i max"
+    "production": "pm2 start ./dist/app.js -i max --watch"
   },
   "repository": {
     "type": "git",
