@@ -23,7 +23,8 @@
     "PostgreSQL",
     "PM2",
     "Babel",
-    "PassportJS"
+    "PassportJS",
+    "ESLint"
   ],
   "author": "Cerino O. Ligutom III (ZeferiniX) <zeferinix@gmail.com>",
   "license": "GPL-3.0",
