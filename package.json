@@ -22,7 +22,8 @@
     "Express",
     "PostgreSQL",
     "PM2",
-    "Babel"
+    "Babel",
+    "PassportJS"
   ],
   "author": "Cerino O. Ligutom III (ZeferiniX) <zeferinix@gmail.com>",
   "license": "GPL-3.0",
