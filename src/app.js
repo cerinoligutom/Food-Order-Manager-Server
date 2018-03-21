@@ -25,10 +25,9 @@ const start = async () => {
   require('./config/configure-express')(app, pgPool);
 
   app.post(
-    '/api',
+    '/',
     isAuthenticated,
     graphqlHTTP(request => {
-      console.log('req.user:', request.user);
       const startTime = Date.now();
 
       let dataloaders = getDataloaders(pgPool);
@@ -40,6 +39,8 @@ const start = async () => {
           pgPool: pgPool,
           dataloaders: dataloaders
         },
+        graphiql: false,
+
 
         /* eslint-disable-next-line no-unused-vars */
         extensions: ({ document, variables, operationName, result }) => ({
@@ -49,8 +50,8 @@ const start = async () => {
     })
   );
 
-  if (process.env.NODE_ENV !== 'production') {
-    app.use(
+  if (process.env.NODE_ENV === 'development') {
+    app.get(
       '/graphql',
       graphqlHTTP(request => {
         const startTime = Date.now();

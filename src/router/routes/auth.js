@@ -5,10 +5,7 @@ import { generateHash } from '../../utils/password';
 export default (pgPool) => {
   const router = express.Router();
 
-  router.post('/login', passport.authenticate('custom', {
-    failureRedirect: '/login',
-    successRedirect: '/dashboard'
-  }));
+  router.post('/login', passport.authenticate('custom'));
 
   router.get('/logout', (req, res) => {
     req.logout();
