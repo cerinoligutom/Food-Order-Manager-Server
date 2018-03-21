@@ -5,17 +5,22 @@ import setCustomStrategy from './custom-strategy';
 
 export default (app, pgPool) => {
   let expiryDuration = 60 * 60 * 24 * 7; // 1 week
+
   let sessionConfig = {
     genid: () => uuidv4(),
 
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    secure: process.env.NODE_ENV === 'production',
+    domain: '.zeferinix.com',
     maxAge: expiryDuration,
     expires: new Date(Date.now() + expiryDuration),
+    httpOnly: false,
     cookie: {
       expires: false,
-      secure: false
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: false
     }
   };
 

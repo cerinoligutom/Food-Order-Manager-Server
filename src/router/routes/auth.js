@@ -8,7 +8,7 @@ export default (pgPool) => {
   router.post('/login', passport.authenticate('custom', {
     passReqToCallback: true
   }), (req, res) => {
-    res.send(req.user.id);
+    res.send(req.user);
   });
 
   router.get('/logout', (req, res) => {
