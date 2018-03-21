@@ -18,6 +18,10 @@ export default (sequelize, DataTypes) => {
             args: true,
             msg: 'The username can only contain letters and numbers'
           },
+          len: {
+            args: [4, 100],
+            msg: 'The username needs to be between 4 and 100 characters long'
+          }
         }
       },
 
