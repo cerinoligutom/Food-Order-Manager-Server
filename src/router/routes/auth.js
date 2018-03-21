@@ -5,7 +5,11 @@ import { generateHash } from '../../utils/password';
 export default (pgPool) => {
   const router = express.Router();
 
-  router.post('/login', passport.authenticate('custom'));
+  router.post('/login', passport.authenticate('custom', {
+    passReqToCallback: true
+  }), (req, res) => {
+    res.send(req.user.id);
+  });
 
   router.get('/logout', (req, res) => {
     req.logout();
