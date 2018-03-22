@@ -51,7 +51,7 @@ const start = async () => {
   );
 
   if (process.env.NODE_ENV === 'development') {
-    app.get(
+    app.use(
       '/graphql',
       graphqlHTTP(request => {
         const startTime = Date.now();
