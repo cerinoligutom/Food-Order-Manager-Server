@@ -26,7 +26,7 @@ const start = async () => {
 
   app.post(
     '/',
-    isAuthenticated,
+    // isAuthenticated,
     graphqlHTTP(request => {
       const startTime = Date.now();
 
