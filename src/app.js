@@ -7,7 +7,9 @@ import schema from './graphql/schema';
 import getDataloaders from './graphql/dataloaders';
 import postgrePool from './postgre';
 
-import { isAuthenticated } from './utils/auth';
+// import { isAuthenticated } from './utils/auth';
+
+import passport from 'passport';
 
 require('dotenv').config();
 
@@ -27,6 +29,7 @@ const start = async () => {
   app.post(
     '/',
     // isAuthenticated,
+    passport.authenticate('jwt', { session: false }),
     graphqlHTTP(request => {
       const startTime = Date.now();
 
