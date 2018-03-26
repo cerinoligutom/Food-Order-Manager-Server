@@ -1,12 +1,10 @@
-const shortid = require('shortid');
-
 export default (sequelize, DataTypes) => {
   const Vendor = sequelize.define('vendor',
     {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: shortid.generate()
+        alllowNull: false
       },
 
       name: { type: DataTypes.STRING },

@@ -1,12 +1,10 @@
-const shortid = require('shortid');;
-
 export default (sequelize, DataTypes) => {
   const ContactNumber = sequelize.define('contact_number',
     {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: shortid.generate()
+        allowNull: false
       },
 
       number: { type: DataTypes.STRING },

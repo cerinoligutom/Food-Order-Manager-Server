@@ -2,6 +2,7 @@ import express from 'express';
 import { generateHash, compareHash } from '../../utils/password';
 import moment from 'moment';
 import jwt from '../../utils/jwt';
+import shortid from 'shortid';
 
 export default (pgPool) => {
   const router = express.Router();
@@ -68,6 +69,7 @@ export default (pgPool) => {
       let hash = await generateHash(password);
 
       let createdUser = await pgPool.User.create({
+        id: shortid.generate(),
         username: username,
         email: email,
         hash: hash,

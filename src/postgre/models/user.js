@@ -1,13 +1,10 @@
-const shortid = require('shortid');;
-import moment from 'moment';
-
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('user',
     {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: shortid.generate()
+        allowNull: false
       },
 
       username: {
@@ -83,7 +80,7 @@ export default (sequelize, DataTypes) => {
 
       last_active: {
         type: DataTypes.DATE,
-        defaultValue: moment()
+        defaultValue: DataTypes.NOW
       }
     },
     {

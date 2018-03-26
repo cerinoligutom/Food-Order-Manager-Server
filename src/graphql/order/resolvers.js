@@ -1,5 +1,6 @@
 import { GraphQLError } from 'graphql';
 import DataLoader from 'dataloader';
+import shortid from 'shortid';
 
 export const Query = {
   Order: (_, { id }, { pgPool }) =>
@@ -13,12 +14,20 @@ export const Mutation = {
     if (!transaction) { throw new GraphQLError(`Transaction ID <${input.transaction_id}> does not exist`); }
 
     let order = await pgPool.Order.create({
+      id: shortid.generate(),
       transaction_id: input.transaction_id,
       user_id: input.user_id,
       comment: input.comment
     });
 
     if (!order) { throw new GraphQLError('Order not created', order); }
+
+    input.orderItems = input.orderItems.map(orderItem => {
+      let temp = {...orderItem};
+      temp.id = shortid.generate();
+      temp.order_id = order.id;
+      return temp;
+    });
 
     let orderItems = await pgPool.OrderItem.bulkCreate(input.orderItems);
 

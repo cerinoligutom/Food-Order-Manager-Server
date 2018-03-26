@@ -1,12 +1,10 @@
-const shortid = require('shortid');;
-
 export default (sequelize, DataTypes) => {
   const Role = sequelize.define('role',
     {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: shortid.generate()
+        allowNull: false
       },
 
       name: { type: DataTypes.STRING }

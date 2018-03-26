@@ -1,12 +1,10 @@
-const shortid = require('shortid');;
-
 export default (sequelize, DataTypes) => {
   const Transaction = sequelize.define('transaction',
     {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: shortid.generate()
+        allowNull: false
       },
 
       host_id: { type: DataTypes.STRING },

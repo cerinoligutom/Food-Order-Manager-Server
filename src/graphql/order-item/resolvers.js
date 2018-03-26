@@ -1,5 +1,6 @@
 import { GraphQLError } from 'graphql';
 import DataLoader from 'dataloader';
+import shortid from 'shortid';
 
 export const Query = {
   OrderItem: async (_, { id }, { pgPool }) =>
@@ -13,6 +14,12 @@ export const Mutation = {
     let order = await pgPool.Order.findOne({ where: { id: input[0].order_id }});
 
     if (!order) { throw new GraphQLError('Order does not exist'); }
+
+    input = input.map(orderItem => {
+      let temp = {...orderItem};
+      temp.id = shortid.generate();
+      return temp;
+    });
 
     let orderItems = await pgPool.OrderItem.bulkCreate(input);
 

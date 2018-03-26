@@ -1,5 +1,6 @@
 import { GraphQLError } from 'graphql';
 import DataLoader from 'dataloader';
+import shortid from 'shortid';
 
 export const Query = {
   Vendor: (_, { id }, { pgPool }) =>
@@ -15,6 +16,7 @@ export const Mutation = {
   addVendor: (_, { input }, { pgPool }) => {
     // TODO:
     // Check if vendor exists
+    input.id = shortid.generate();
     return pgPool.Vendor.create(input);
   },
 

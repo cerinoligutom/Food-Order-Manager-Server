@@ -1,12 +1,10 @@
-const shortid = require('shortid');;
-
 export default (sequelize, DataTypes) => {
   const Order = sequelize.define('order',
     {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: shortid.generate()
+        allowNull: false
       },
 
       user_id: { type: DataTypes.STRING },
