@@ -1,14 +1,46 @@
 import express from 'express';
-import passport from 'passport';
-import { generateHash } from '../../utils/password';
+import { generateHash, compareHash } from '../../utils/password';
+import moment from 'moment';
+import jwt from '../../utils/jwt';
 
 export default (pgPool) => {
   const router = express.Router();
 
-  router.post('/login', passport.authenticate('custom', {
-    passReqToCallback: true
-  }), (req, res) => {
-    res.send(req.user);
+  router.post('/login', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    let user = await pgPool.User.findOne({
+      where: {
+        [pgPool.op.or]: [
+          { username: username },
+          { email: username }
+        ]
+      }
+    });
+
+    if (!user) {
+      res.status(409).send({ message: 'Bad username or password'});
+    }
+
+    let isCorrectPassword = await compareHash(password, user.hash);
+
+    if (isCorrectPassword) {
+      await user.updateAttributes({
+        last_active: moment()
+      });
+
+      let payload = { userId: user.id };
+
+      let token = jwt.sign(payload, process.env.JWT_SECRET);
+
+      res.send({
+        message: 'ok',
+        token: token
+      });
+    } else {
+      res.status(409).send({ message: 'Bad password' });
+    }
   });
 
   router.get('/logout', (req, res) => {
