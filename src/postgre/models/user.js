@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+const shortid = require('shortid');;
 import moment from 'moment';
 
 export default (sequelize, DataTypes) => {

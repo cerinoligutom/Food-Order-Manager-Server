@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+const shortid = require('shortid');;
 
 export default (sequelize, DataTypes) => {
   const Order = sequelize.define('order',
