@@ -10,13 +10,15 @@ extend type Query {
 
 extend type Mutation {
   addOrder(input: AddOrderInput): Order
+  editOrder(input: EditOrderInput): Order
   cancelOrder(id: ID!): Order
+  changeOrderFullyPaidStatus(id: ID!, value: Boolean): Order
 }
 
 type Order {
   id: ID!
   User: User
-  comments: String
+  comment: String
   isFullyPaid: Boolean
   OrderItems: [OrderItem]
   Transaction: Transaction
@@ -28,6 +30,11 @@ input AddOrderInput {
   user_id: ID!
   comment: String
   orderItems: [AddOrderItemInput]
+}
+
+input EditOrderInput {
+  id: ID!
+  comment: String
 }
 `;
 

@@ -36,12 +36,28 @@ export const Mutation = {
     return order;
   },
 
+  editOrder: async(_, { input }, { pgPool }) => {
+    let order = await pgPool.Order.findOne({ where: { id: input.id }});
+
+    if (!order) { throw new GraphQLError('Order not found'); }
+
+    return order.updateAttributes({ comment: input.comment });
+  },
+
   cancelOrder: async (_, { id }, { pgPool }) => {
     let order = await pgPool.Order.findOne({ where: { id: id }});
 
     if (!order) { throw new GraphQLError(`Order ID <${id}> does not exist`); }
 
     return order.updateAttributes({ isCancelled: true });
+  },
+
+  changeOrderFullyPaidStatus: async (_, { id, value }, { pgPool }) => {
+    let order = await pgPool.Order.findOne({ where: { id: id }});
+
+    if (!order) { throw new GraphQLError(`Order ID <${id}> does not exist`); }
+
+    return order.updateAttributes({ isFullyPaid: value });
   }
 };
 
