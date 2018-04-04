@@ -4,7 +4,7 @@ import Order from '../order/schema';
 
 const OrderItem = `
 extend type Query {
-  OrderItem(id: ID!): Order
+  OrderItem(id: ID!): OrderItem
 }
 
 extend type Mutation {
