@@ -20,6 +20,7 @@ type Order {
   isFullyPaid: Boolean
   OrderItems: [OrderItem]
   Transaction: Transaction
+  created_at: Date
 }
 
 input AddOrderInput {

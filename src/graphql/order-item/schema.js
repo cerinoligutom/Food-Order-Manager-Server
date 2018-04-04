@@ -19,6 +19,7 @@ type OrderItem {
   Product: Product
   quantity: Int
   is_cancelled: Boolean
+  created_at: Date
 }
 
 input AddOrderItemInput {
