@@ -22,6 +22,11 @@ type OrderItem {
   created_at: Date
 }
 
+input AddInitialOrderItemInput {
+  product_id: ID!
+  quantity: Int!
+}
+
 input AddOrderItemInput {
   order_id: ID!
   product_id: ID!

@@ -29,7 +29,7 @@ input AddOrderInput {
   transaction_id: ID!
   user_id: ID!
   comment: String
-  orderItems: [AddOrderItemInput]
+  orderItems: [AddInitialOrderItemInput]
 }
 
 input EditOrderInput {
