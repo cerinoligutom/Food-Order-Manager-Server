@@ -2,7 +2,7 @@ import express from 'express';
 import { generateHash, compareHash } from '../../utils/password';
 import moment from 'moment';
 import jwt from '../../utils/jwt';
-import shortid from 'shortid';
+let shortid = require('shortid');
 
 export default (pgPool) => {
   const router = express.Router();
