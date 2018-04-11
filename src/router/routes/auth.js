@@ -21,7 +21,7 @@ export default (pgPool) => {
     });
 
     if (!user) {
-      res.status(409).send({ message: 'Bad username or password'});
+      res.status(409).send({ message: 'Bad username or password' });
     }
 
     let isCorrectPassword = await compareHash(password, user.hash);
@@ -68,7 +68,7 @@ export default (pgPool) => {
 
       let hash = await generateHash(password);
 
-      let createdUser = await pgPool.User.create({
+      return pgPool.User.create({
         id: shortid.generate(),
         username: username,
         email: email,
@@ -76,9 +76,9 @@ export default (pgPool) => {
         first_name: firstName,
         middle_name: middleName,
         last_name: lastName
-      });
+      }).then(createdUser => res.send(createdUser.id))
+        .catch(err => res.status(409).send(err.message));
 
-      res.send(createdUser.id);
     }).catch(err => {
       res.status(409).send(err.message);
     });
