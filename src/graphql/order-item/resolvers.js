@@ -33,7 +33,7 @@ export const Mutation = {
 
     if (!orderItem) { throw new GraphQLError(`Order Item ID <${input.id} does not exist`); }
 
-    return orderItem.updateAttributes({ quantity: input.quantity });
+    return orderItem.updateAttributes(input);
   },
 
   cancelOrderItem: async (_, { id }, { pgPool }) => {

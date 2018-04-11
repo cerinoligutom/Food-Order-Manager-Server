@@ -17,8 +17,8 @@ const app = express();
 
 const start = async () => {
   const pgPool = await postgrePool();
-  // await pgPool.sequelize.sync({ force: true });
-  await pgPool.sequelize.sync();
+  await pgPool.sequelize.sync({ force: true });
+  // await pgPool.sequelize.sync();
 
 
   // let dataloaders = getDataloaders(pgPool);

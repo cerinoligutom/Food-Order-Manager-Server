@@ -18,6 +18,7 @@ type OrderItem {
   Order: Order
   Product: Product
   quantity: Int
+  comment: String
   is_cancelled: Boolean
   created_at: Date
 }
@@ -25,17 +26,20 @@ type OrderItem {
 input AddInitialOrderItemInput {
   product_id: ID!
   quantity: Int!
+  comment: String
 }
 
 input AddOrderItemInput {
   order_id: ID!
   product_id: ID!
   quantity: Int!
+  comment: String
 }
 
 input EditOrderItemInput {
   id: ID!
   quantity: Int!
+  comment: String
 }
 `;
 

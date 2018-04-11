@@ -36,14 +36,6 @@ export const Mutation = {
     return order;
   },
 
-  editOrder: async(_, { input }, { pgPool }) => {
-    let order = await pgPool.Order.findOne({ where: { id: input.id }});
-
-    if (!order) { throw new GraphQLError('Order not found'); }
-
-    return order.updateAttributes({ comment: input.comment });
-  },
-
   cancelOrder: async (_, { id }, { pgPool }) => {
     let order = await pgPool.Order.findOne({ where: { id: id }});
 

@@ -13,6 +13,8 @@ export default (sequelize, DataTypes) => {
 
       quantity: { type: DataTypes.INTEGER },
 
+      comment: { type: DataTypes.STRING },
+
       is_cancelled: {
         type: DataTypes.BOOLEAN,
         defaultValue: false

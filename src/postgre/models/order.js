@@ -9,8 +9,6 @@ export default (sequelize, DataTypes) => {
 
       user_id: { type: DataTypes.STRING },
 
-      comment: { type: DataTypes.STRING },
-
       isFullyPaid: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
