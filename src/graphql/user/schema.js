@@ -29,8 +29,8 @@ type User {
   created_at: Date
   is_active: Boolean
   last_active: Date
-  Role: [Role]
-  Order: [Order]
+  Roles: [Role]
+  Orders: [Order]
 }
 
 input EditUserInput {
