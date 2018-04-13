@@ -34,12 +34,12 @@ export const Mutation = {
 export const User = {
   full_name: user => Promise.resolve(`${user.first_name} ${user.last_name}`),
 
-  Role: async (user, _, { dataloaders }) => {
+  Roles: async (user, _, { dataloaders }) => {
     let userRoles = await dataloaders.userRolesById.load(user.id);
     return userRoles.map(userRole => dataloaders.roleById.load(userRole.role_id));
   },
 
-  Order: (user, _, { dataloaders }) =>
+  Orders: (user, _, { dataloaders }) =>
     dataloaders.ordersByUserId.load(user.id)
 };
 

@@ -46,7 +46,7 @@ export const Mutation = {
 };
 
 export const OrderItem = {
-  Orders: (orderItem, _, { dataloaders }) =>
+  Order: (orderItem, _, { dataloaders }) =>
     dataloaders.orderById.load(orderItem.order_id),
 
   Product: (orderItem, _, { dataloaders }) =>
