@@ -21,6 +21,7 @@ type Order {
   OrderItems: [OrderItem]
   Transaction: Transaction
   created_at: Date
+  isCancelled: Boolean
 }
 
 input AddOrderInput {

@@ -41,7 +41,7 @@ export const Mutation = {
 
     if (!orderItem) { throw new GraphQLError(`Order Item ID <${id} does not exist`); }
 
-    return orderItem.updateAttributes({ isCancelled: true });
+    return orderItem.updateAttributes({ is_cancelled: true });
   }
 };
 
@@ -55,7 +55,7 @@ export const OrderItem = {
 
 const getOrderItemsByOrderIds = pgPool => ids =>
   Promise.resolve(
-    ids.map(id => pgPool.OrderItem.findAll({ where: { order_id: id }}))
+    ids.map(id => pgPool.OrderItem.findAll({ where: { order_id: id, is_cancelled: false }}))
   );
 
 export const dataloaders = pgPool => ({

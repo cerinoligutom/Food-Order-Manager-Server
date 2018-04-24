@@ -4,7 +4,7 @@ import shortid from 'shortid';
 
 export const Query = {
   Order: (_, { id }, { pgPool }) =>
-    pgPool.Order.findOne({ where: { id: id }})
+    pgPool.Order.findOne({ where: { id: id, isCancelled: false }})
 };
 
 export const Mutation = {
@@ -66,17 +66,17 @@ export const Order = {
 
 const getOrdersById = pgPool => ids =>
   Promise.resolve(
-    ids.map(id => pgPool.Order.findOne({ where: { id: id }}))
+    ids.map(id => pgPool.Order.findOne({ where: { id: id, isCancelled: false }}))
   );
 
 const getOrdersByUserIds = pgPool => ids =>
   Promise.resolve(
-    ids.map(id => pgPool.Order.findAll({ where: { user_id: id }}))
+    ids.map(id => pgPool.Order.findAll({ where: { user_id: id, isCancelled: false }}))
   );
 
 const getOrdersByTransactionIds = pgPool => ids =>
   Promise.resolve(
-    ids.map(id => pgPool.Order.findAll({ where: { transaction_id: id }}))
+    ids.map(id => pgPool.Order.findAll({ where: { transaction_id: id, isCancelled: false }}))
   );
 
 export const dataloaders = pgPool => ({
