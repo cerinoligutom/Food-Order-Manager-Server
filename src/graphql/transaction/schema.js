@@ -13,6 +13,7 @@ extend type Mutation {
   addTransaction(input: AddTransactionInput): Transaction
   editTransaction(input: EditTransactionInput): Transaction
   deleteTransaction(id: ID!): Boolean
+  changeTransactionFulfilledStatus(id: ID!, value: Boolean): Transaction
 }
 
 type Transaction {
