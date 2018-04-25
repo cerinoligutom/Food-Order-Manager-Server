@@ -57,13 +57,13 @@ export default (pgPool) => {
     let middleName = req.body.middleName;
     let lastName = req.body.lastName;
 
-    pgPool.User.findOne({
+    return pgPool.User.findOne({
       where: {
         [pgPool.op.or]: [{ username: username }, { email: email }]
       }
     }).then(async user => {
       if (user) {
-        res.status(409).send('User/Email already exists');
+        return res.status(409).send('User/Email already exists');
       }
 
       let hash = await generateHash(password);
@@ -77,11 +77,9 @@ export default (pgPool) => {
         middle_name: middleName,
         last_name: lastName
       }).then(createdUser => res.status(200).send({ id: createdUser.id }))
-        .catch(err => res.status(409).send(err.message));
+        .catch(err => res.status(409).send(err.errors.map(error => ({ message: error.message, path: error.path }))));
 
-    }).catch(err => {
-      res.status(409).send(err.message);
-    });
+    }).catch(err => res.status(409).send(err.errors.map(error => ({ message: error.message, path: error.path }))));
   });
 
   router.get('/isAuthenticated', (req, res) => {
