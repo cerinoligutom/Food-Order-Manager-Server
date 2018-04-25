@@ -76,7 +76,7 @@ export default (pgPool) => {
         first_name: firstName,
         middle_name: middleName,
         last_name: lastName
-      }).then(createdUser => res.send(createdUser.id))
+      }).then(createdUser => res.status(200).send({ id: createdUser.id }))
         .catch(err => res.status(409).send(err.message));
 
     }).catch(err => {
