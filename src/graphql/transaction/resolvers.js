@@ -37,7 +37,7 @@ export const Mutation = {
   deleteTransaction: (_, { id }, { pgPool }) =>
     pgPool.Transaction.destroy({ where: { id: id }}),
 
-  changeOrderFullyPaidStatus: async (_, { id, value }, { pgPool }) => {
+  changeTransactionFulfilledStatus: async (_, { id, value }, { pgPool }) => {
     let transaction = await pgPool.Transaction.findOne({ where: { id: id }});
 
     if (!transaction) { throw new GraphQLError(`Transaction ID <${id}> does not exist`); }
