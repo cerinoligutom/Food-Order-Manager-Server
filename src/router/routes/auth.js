@@ -21,7 +21,7 @@ export default (pgPool) => {
     });
 
     if (!user) {
-      res.status(409).send({ message: 'Bad username or password' });
+      res.status(409).send({ message: 'Bad username or password. Please try again!' });
     }
 
     let isCorrectPassword = await compareHash(password, user.hash);
@@ -40,7 +40,7 @@ export default (pgPool) => {
         token: token
       });
     } else {
-      res.status(409).send({ message: 'Bad password' });
+      res.status(409).send({ message: 'Bad password. Please try again!' });
     }
   });
 
@@ -63,7 +63,7 @@ export default (pgPool) => {
       }
     }).then(async user => {
       if (user) {
-        return res.status(409).send('User/Email already exists');
+        return res.status(409).send([{ path: 'Username/Email', message: 'User/Email already exists' }]);
       }
 
       let hash = await generateHash(password);
