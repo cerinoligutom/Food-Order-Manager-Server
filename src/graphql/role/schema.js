@@ -3,11 +3,7 @@ import Base from '../base';
 const Role = `
 extend type Query {
   Role(id: ID): Role
-}
-
-extend type Mutation {
-  createRole(name: String!): Role
-  deleteRole(id: ID!): Boolean
+  Roles: [Role]
 }
 
 type Role {
