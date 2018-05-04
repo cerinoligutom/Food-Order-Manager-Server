@@ -6,6 +6,11 @@ extend type Query {
   Roles: [Role]
 }
 
+extend type Mutation {
+  createRole(name: String!): Role
+  deleteRole(id: ID!): Boolean
+}
+
 type Role {
   id: ID,
   name: String

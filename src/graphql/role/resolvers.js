@@ -1,4 +1,5 @@
 import DataLoader from 'dataloader';
+import shortid from 'shortid';
 
 export const Query = {
   Role: async (_, { id }, { pgPool }) => {
@@ -8,6 +9,19 @@ export const Query = {
   Roles: async (_, __, { pgPool }) => {
     let roles = await pgPool.Role.findAll();
     return roles;
+  }
+};
+
+export const Mutation = {
+  createRole: async (_, { name }, { pgPool }) => {
+    // TODO:
+    // Check if user is admin
+
+    let createdRole = await pgPool.Role.create({
+      id: shortid.generate(),
+      name: name
+    });
+    return createdRole;
   }
 };
 
