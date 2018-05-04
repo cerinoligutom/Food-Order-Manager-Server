@@ -5,7 +5,9 @@ import Product from '../product/schema';
 const Vendor = `
 extend type Query {
   Vendor(id: ID!): Vendor
-  Vendors(from: ID = 0, limit: Int = 5): [Vendor]
+
+  # Pagination not implemented yet
+  Vendors(from: ID = 0, limit: Int = 25): [Vendor]
 }
 
 extend type Mutation {

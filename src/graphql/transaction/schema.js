@@ -6,7 +6,9 @@ import Order from '../order/schema';
 const Transaction = `
 extend type Query {
   Transaction(id: ID!): Transaction
-  Transactions(from: ID = 0, limit: Int = 5): [Transaction]
+
+  # Pagination not implemented yet
+  Transactions(from: ID = 0, limit: Int = 10): [Transaction]
 }
 
 extend type Mutation {

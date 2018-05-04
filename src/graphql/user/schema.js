@@ -6,6 +6,9 @@ const User = `
 extend type Query {
   me: User
   User(id: ID!): User
+
+  # Pagination not implemented yet
+  Users(from: ID = 0, limit: Int = 25): [User]
 }
 
 extend type Mutation {

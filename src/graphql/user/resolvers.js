@@ -10,7 +10,11 @@ export const Query = {
   me: async (_, __, { pgPool, user }) => {
     let me = await pgPool.User.findOne({ where: { id: user.id }});
     return me;
-  }
+  },
+
+  // TODO: Pagination
+  // eslint-disable-next-line no-unused-vars
+  Users: async (_, __, { pgPool }) => pgPool.User.findAll()
 };
 
 export const Mutation = {
