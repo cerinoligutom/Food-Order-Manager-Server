@@ -38,6 +38,21 @@ export const Mutation = {
 export const User = {
   full_name: user => Promise.resolve(`${user.first_name} ${user.last_name}`),
 
+  is_admin: async (user, _, { dataloaders }) => {
+    let userRoles = await dataloaders.userRolesById.load(user.id);
+    userRoles = await Promise.all(userRoles.map(userRole => dataloaders.roleById.load(userRole.role_id)));
+
+    let isAdmin = false;
+    for (let role of userRoles) {
+      if (role.name.toLowerCase() === 'admin') {
+        isAdmin = true;
+        break;
+      }
+    }
+
+    return isAdmin;
+  },
+
   Roles: async (user, _, { dataloaders }) => {
     let userRoles = await dataloaders.userRolesById.load(user.id);
     return userRoles.map(userRole => dataloaders.roleById.load(userRole.role_id));

@@ -32,6 +32,7 @@ type User {
   created_at: Date
   is_active: Boolean
   last_active: Date
+  is_admin: Boolean
   Roles: [Role]
   Orders: [Order]
 }
