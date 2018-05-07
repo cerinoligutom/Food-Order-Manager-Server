@@ -47,7 +47,7 @@ export const Mutation = {
     let isRemoved = await pgPool.UserRole.destroy({
       where: {
         user_id: userId,
-        role_Id: roleId
+        role_id: roleId
       }
     });
 
