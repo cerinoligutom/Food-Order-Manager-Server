@@ -8,7 +8,7 @@ extend type Query {
   Transaction(id: ID!): Transaction
 
   # Pagination not implemented yet
-  Transactions(from: ID = 0, limit: Int = 10): [Transaction]
+  Transactions(from: ID = "", limit: Int = 10): [Transaction]
 }
 
 extend type Mutation {

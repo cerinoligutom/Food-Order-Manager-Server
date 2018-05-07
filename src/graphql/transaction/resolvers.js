@@ -6,10 +6,16 @@ export const Query = {
   Transaction: (_, { id }, { pgPool }) =>
     pgPool.Transaction.findOne({ where: { id: id }}),
 
-  // TODO: Pagination
-  // eslint-disable-next-line no-unused-vars
-  Transactions: (_, { from, limit }, { pgPool }) =>
-    pgPool.Transaction.findAll()
+  Transactions: async (_, { from, limit }, { pgPool }) => {
+    if (!from) {
+      return pgPool.Transaction.findAll({ limit: limit });
+    } else {
+      let transaction = await pgPool.Transaction.findOne({ where: { id: from }});
+      if (!transaction) { throw new GraphQLError(`Transaction ID <${from}> does not exist`); }
+
+      return pgPool.Transaction.findAll({ limit: limit, order: ['created_at'], where: { created_at: { [pgPool.op.gt]: transaction.created_at } } });
+    }
+  }
 };
 
 export const Mutation = {
